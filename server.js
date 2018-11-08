@@ -31,6 +31,11 @@ con.connect(function (err) {
 });
 
 // Functions
+function encryptJson(json){
+    var hash = require('object-hash');
+     return hash(json)
+}
+
 
 // Secure routes
 function requireAuth(req, res, next) {
@@ -91,6 +96,32 @@ app.get('/insert', function (req, res) {
         if (err) throw err;
     });*/
 });
+
+app.get('/getPrevious', function(req, res){
+    let query = "";
+    let idContrat = req.body.json.idContrat;
+    let lastBlock = null;
+    con.query(sql , function(err , result){
+        if (err) throw err;
+        lastBlock = JSON.parse(result);
+    });
+    // retour d'ajax
+    res.send(lastBlock);
+});
+
+app.get('/insertBlock' , function(req , res){
+    let json = req.body.json; 
+    let query = "";
+
+    con.query(sql , function(err , result){
+        if (err) throw err;
+        lastBlock = JSON.parse(result);
+    });
+
+    res.send(result);
+});
+
+
 
 // 404 handler
 app.use(function (req, res, next) {
