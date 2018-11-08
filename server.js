@@ -84,11 +84,12 @@ app.get('/', function (req, res) {
 });
 
 app.get('/insert', function (req, res) {
-    sql = 'INSERT INTO stream SET stream_status = 1, stream_game = "' + data.stream.game + '";';
+    res.send("Insert " + req.query.typesinistre + " " + req.query.a);
+    /*sql = 'INSERT INTO stream SET stream_status = 1, stream_game = "' + data.stream.game + '";';
     // Execute sql query
     con.query(sql, function (err, result) {
         if (err) throw err;
-    });
+    });*/
 });
 
 // 404 handler
@@ -103,6 +104,6 @@ app.use(function (err, req, res, next) {
 });
 
 // Launch application
-let server = app.listen(4443, function () {
-    console.log('Example app listening on port 4443!');
+let server = app.listen(4444, function () {
+    console.log('Example app listening on port 4444!');
 });
