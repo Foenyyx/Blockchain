@@ -83,6 +83,14 @@ app.get('/', function (req, res) {
     res.send('Ca marche, voici ton ip ' + ip);
 });
 
+app.get('/insert', function (req, res) {
+    sql = 'INSERT INTO stream SET stream_status = 1, stream_game = "' + data.stream.game + '";';
+    // Execute sql query
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+    });
+});
+
 // 404 handler
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!");
